@@ -1,0 +1,66 @@
+/* TenantSignup.css */
+.tenant-signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4a90e2, #007bff);
+}
+
+.tenant-signup-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+.tenant-signup-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.tenant-signup-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tenant-signup-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.tenant-signup-box input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.tenant-signup-box button {
+    background: #007bff;
+    color: #fff;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.tenant-signup-box button:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .tenant-signup-box {
+        width: 90%;
+        padding: 30px;
+    }
+}

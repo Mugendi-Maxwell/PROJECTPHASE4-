@@ -1,0 +1,66 @@
+/* LandlordSignup.css */
+.landlord-signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.landlord-signup-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+.landlord-signup-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.landlord-signup-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.landlord-signup-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.landlord-signup-box input:focus {
+    border-color: #2a5298;
+    outline: none;
+}
+
+.landlord-signup-box button {
+    background: #2a5298;
+    color: #fff;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.landlord-signup-box button:hover {
+    background: #1e3c72;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .landlord-signup-box {
+        width: 90%;
+        padding: 30px;
+    }
+}

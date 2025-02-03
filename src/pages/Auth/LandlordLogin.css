@@ -1,0 +1,66 @@
+/* LandlordLogin.css */
+.landlord-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+}
+
+.landlord-login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+.landlord-login-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.landlord-login-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.landlord-login-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.landlord-login-box input:focus {
+    border-color: #4ca1af;
+    outline: none;
+}
+
+.landlord-login-box button {
+    background: #4ca1af;
+    color: #fff;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.landlord-login-box button:hover {
+    background: #357a87;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .landlord-login-box {
+        width: 90%;
+        padding: 30px;
+    }
+}

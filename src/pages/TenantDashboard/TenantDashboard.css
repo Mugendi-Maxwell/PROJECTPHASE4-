@@ -1,0 +1,59 @@
+/* src/pages/TenantDashboard/TenantDashboard.css */
+
+.TenantDashboard {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin: 10px 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #e7f7e7;
+    transition: background-color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  nav ul li a:active {
+    background-color: #45a049;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    nav ul li {
+      margin: 8px 0;
+    }
+  
+    nav ul li a {
+      font-size: 1rem;
+      padding: 8px 15px;
+    }
+  }
+  
