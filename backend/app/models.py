@@ -1,61 +1,62 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from .utils import Base
+from datetime import datetime
+from .utils import Base  # Ensure this points to your Base definition
 
-# House Model
-class House(Base):
-    __tablename__ = "houses"
-    id = Column(Integer, primary_key=True, index=True)
-    address = Column(String, unique=True, index=True)
-    rent_price = Column(Float)
-    num_apartments = Column(Integer)
-    apartments = relationship("Apartment", back_populates="house")
-
-# Apartment Model
-class Apartment(Base):
-    __tablename__ = "apartments"
-    id = Column(Integer, primary_key=True, index=True)
-    house_id = Column(Integer, ForeignKey("houses.id"))
-    apartment_number = Column(String, unique=True, index=True)
-    status = Column(String, default="available")
-    house = relationship("House", back_populates="apartments")
-    tenants = relationship("Tenant", back_populates="apartment")
-
-# Tenant Model
-class Tenant(Base):
-    __tablename__ = "tenants"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    contact = Column(String)
-    apartment_id = Column(Integer, ForeignKey("apartments.id"))
-    apartment = relationship("Apartment", back_populates="tenants")
-    complaints = relationship("Complaint", back_populates="tenant")
-    payments = relationship("Payment", back_populates="tenant")
-    password = Column(String)  
-
-# Complaint Model
-class Complaint(Base):
-    __tablename__ = "complaints"
-    id = Column(Integer, primary_key=True, index=True)
-    description = Column(String)
-    status = Column(String, default="pending")
-    tenant_id = Column(Integer, ForeignKey("tenants.id"))
-    tenant = relationship("Tenant", back_populates="complaints")
-
-# Payment Model
-class Payment(Base):
-    __tablename__ = "payments"
-    id = Column(Integer, primary_key=True, index=True)
-    amount = Column(Float)
-    date = Column(String)
-    tenant_id = Column(Integer, ForeignKey("tenants.id"))
-    tenant = relationship("Tenant", back_populates="payments")
-
-# Landlord Model
 class Landlord(Base):
-    __tablename__ = "landlords"
+    __tablename__ = 'landlords'
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, nullable=False)  # Unique constraint to prevent duplicates
-    contact = Column(Integer, nullable=False)  # Ensure contact is always provided
-    password = Column(String, nullable=False)  # Ensure password is always provided
+    name = Column(String(100), nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
+    password = Column(String(100), nullable=False)
+    
+    # Relationship to House model (one-to-many)
+    houses = relationship('House', back_populates='landlord')
 
+class Tenant(Base):
+    __tablename__ = 'tenants'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
+    password = Column(String(100), nullable=False)
+    house_id = Column(Integer, ForeignKey('houses.id'), nullable=True)
+    
+    # Relationships to Payment and Complaint models
+    payments = relationship('Payment', back_populates='tenant')
+    complaints = relationship('Complaint', back_populates='tenant')
+    
+    # Optional back-populated relationship to House
+    house = relationship('House', back_populates='tenants')
+
+class House(Base):
+    __tablename__ = 'houses'
+    id = Column(Integer, primary_key=True, index=True)
+    address = Column(String(200), nullable=False)
+    num_apartments = Column(Integer, nullable=False)
+    rent_price = Column(Float, nullable=False)
+    landlord_id = Column(Integer, ForeignKey('landlords.id'), nullable=False)
+    vacant_apartments = Column(Integer, nullable=False)
+    
+    # Relationships to Landlord and Tenant models
+    landlord = relationship('Landlord', back_populates='houses')
+    tenants = relationship('Tenant', back_populates='house')
+
+class Payment(Base):
+    __tablename__ = 'payments'
+    id = Column(Integer, primary_key=True, index=True)
+    amount = Column(Float, nullable=False)
+    date = Column(DateTime, default=datetime.utcnow)
+    tenant_id = Column(Integer, ForeignKey('tenants.id'), nullable=False)
+    
+    # Back-populate relationship to Tenant
+    tenant = relationship('Tenant', back_populates='payments')
+
+class Complaint(Base):
+    __tablename__ = 'complaints'
+    id = Column(Integer, primary_key=True, index=True)
+    description = Column(String(500), nullable=False)
+    status = Column(String(50), default='Pending')
+    tenant_id = Column(Integer, ForeignKey('tenants.id'), nullable=False)
+    
+    # Back-populate relationship to Tenant
+    tenant = relationship('Tenant', back_populates='complaints')
